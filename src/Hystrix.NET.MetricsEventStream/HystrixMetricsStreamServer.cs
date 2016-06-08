@@ -14,6 +14,7 @@
 
 namespace Hystrix.NET.MetricsEventStream
 {
+    using Logging;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -39,7 +40,7 @@ namespace Hystrix.NET.MetricsEventStream
         /// <summary>
         /// The logger instance for this class.
         /// </summary>
-        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(typeof(HystrixMetricsStreamServer));
+        private static readonly ILog Logger = LogProvider.GetLogger(typeof(HystrixMetricsStreamServer));
 
         /// <summary>
         /// The single sampler instance used by all the streamer.
@@ -134,7 +135,7 @@ namespace Hystrix.NET.MetricsEventStream
                     this.listener.Stop();
                 }
 
-                Logger.Error("Failed to start stream server.", e);
+                Logger.ErrorException("Failed to start stream server.", e);
 
                 throw;
             }

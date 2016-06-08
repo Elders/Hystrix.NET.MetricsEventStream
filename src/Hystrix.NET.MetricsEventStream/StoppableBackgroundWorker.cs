@@ -14,6 +14,7 @@
 
 namespace Hystrix.NET.MetricsEventStream
 {
+    using Logging;
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
@@ -28,7 +29,7 @@ namespace Hystrix.NET.MetricsEventStream
         /// <summary>
         /// The logger instance to report events of the background workers.
         /// </summary>
-        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(typeof(StoppableBackgroundWorker));
+        private static readonly ILog Logger = LogProvider.GetLogger(typeof(StoppableBackgroundWorker));
 
         /// <summary>
         /// The background thread running the <see cref="BackgroundThreadMain"/> method. It is recreated after every start.
@@ -254,7 +255,7 @@ namespace Hystrix.NET.MetricsEventStream
             }
             catch (Exception e)
             {
-                Logger.Error(string.Format(CultureInfo.InvariantCulture, "Unhandled exception in {0}.", this.Name), e);
+                Logger.ErrorException(string.Format(CultureInfo.InvariantCulture, "Unhandled exception in {0}.", this.Name), e);
                 thrownException = e;
             }
             finally

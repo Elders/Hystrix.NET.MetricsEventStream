@@ -14,6 +14,7 @@
 
 namespace Hystrix.NET.MetricsEventStream
 {
+    using Logging;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
@@ -45,7 +46,7 @@ namespace Hystrix.NET.MetricsEventStream
         /// <summary>
         /// The logger instance for this type.
         /// </summary>
-        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(typeof(HystrixMetricsStreamer));
+        private static readonly ILog Logger = LogProvider.GetLogger(typeof(HystrixMetricsStreamer));
 
         /// <summary>
         /// Streamer threads are uniquely named using this id.
