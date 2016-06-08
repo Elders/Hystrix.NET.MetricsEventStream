@@ -19,7 +19,6 @@ namespace Hystrix.NET.MetricsEventStream
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Threading;
-    using slf4net;
 
     /// <summary>
     /// A base class for background thread execution, supporting graceful shutdown.
@@ -29,7 +28,7 @@ namespace Hystrix.NET.MetricsEventStream
         /// <summary>
         /// The logger instance to report events of the background workers.
         /// </summary>
-        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(StoppableBackgroundWorker));
+        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(typeof(StoppableBackgroundWorker));
 
         /// <summary>
         /// The background thread running the <see cref="BackgroundThreadMain"/> method. It is recreated after every start.
@@ -117,7 +116,7 @@ namespace Hystrix.NET.MetricsEventStream
                     throw new InvalidOperationException("Background worker is already running.");
                 }
 
-                Logger.Debug(CultureInfo.InvariantCulture, "Starting {0}.", this.Name);
+                Logger.Debug(string.Format(CultureInfo.InvariantCulture, "Starting {0}.", this.Name));
 
                 this.OnStarting();
 
@@ -151,7 +150,7 @@ namespace Hystrix.NET.MetricsEventStream
                     return;
                 }
 
-                Logger.Debug(CultureInfo.InvariantCulture, "Stopping {0}.", this.Name);
+                Logger.Debug(string.Format(CultureInfo.InvariantCulture, "Stopping {0}.", this.Name));
 
                 this.OnStopping();
 
@@ -246,7 +245,7 @@ namespace Hystrix.NET.MetricsEventStream
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We must catch here everything, because any uncatched exception would terminate the process.")]
         private void BackgroundThreadMain()
         {
-            Logger.Debug(CultureInfo.InvariantCulture, "{0} started.", this.Name);
+            Logger.Debug(string.Format(CultureInfo.InvariantCulture, "{0} started.", this.Name));
 
             Exception thrownException = null;
             try
@@ -255,7 +254,7 @@ namespace Hystrix.NET.MetricsEventStream
             }
             catch (Exception e)
             {
-                Logger.Error(e, CultureInfo.InvariantCulture, "Unhandled exception in {0}.", this.Name);
+                Logger.Error(string.Format(CultureInfo.InvariantCulture, "Unhandled exception in {0}.", this.Name), e);
                 thrownException = e;
             }
             finally
@@ -270,7 +269,7 @@ namespace Hystrix.NET.MetricsEventStream
                 this.threadShouldStop.Set();
                 this.threadStopped.Set();
 
-                Logger.Debug(CultureInfo.InvariantCulture, "{0} stopped.", this.Name);
+                Logger.Debug(string.Format(CultureInfo.InvariantCulture, "{0} stopped.", this.Name));
 
                 AsyncCompletedEventHandler handler = this.Stopped;
                 if (handler != null)

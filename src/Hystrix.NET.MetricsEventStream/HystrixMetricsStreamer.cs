@@ -20,7 +20,6 @@ namespace Hystrix.NET.MetricsEventStream
     using System.IO;
     using System.Linq;
     using System.Net;
-    using slf4net;
 
     /// <summary>
     /// A steamer which is created for every connected client. The streamer will listen the sampler and stream the JSON formatted
@@ -46,7 +45,7 @@ namespace Hystrix.NET.MetricsEventStream
         /// <summary>
         /// The logger instance for this type.
         /// </summary>
-        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(HystrixMetricsStreamer));
+        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(typeof(HystrixMetricsStreamer));
 
         /// <summary>
         /// Streamer threads are uniquely named using this id.
@@ -143,7 +142,7 @@ namespace Hystrix.NET.MetricsEventStream
             }
             catch (HttpListenerException)
             {
-                Logger.Info(CultureInfo.InvariantCulture, "Streaming connection #{0} closed by client.", this.Id);
+                Logger.Info(string.Format(CultureInfo.InvariantCulture, "Streaming connection #{0} closed by client.", this.Id));
             }
             finally
             {
@@ -169,7 +168,7 @@ namespace Hystrix.NET.MetricsEventStream
                 }
                 else
                 {
-                    Logger.Warn(CultureInfo.InvariantCulture, "Invalid delay parameter in request: '{0}'", streamDelayInMilliseconds);
+                    Logger.Warn(string.Format(CultureInfo.InvariantCulture, "Invalid delay parameter in request: '{0}'", streamDelayInMilliseconds));
                 }
             }
 
@@ -187,7 +186,7 @@ namespace Hystrix.NET.MetricsEventStream
             {
                 if (this.metricsDataQueue.Count + e.Data.Count() > QueueSizeWarningLimit)
                 {
-                    Logger.Warn(CultureInfo.InvariantCulture, "Streamer #{0} data queue is full, metrics thrown away.", this.Id);
+                    Logger.Warn(string.Format(CultureInfo.InvariantCulture, "Streamer #{0} data queue is full, metrics thrown away.", this.Id));
                     return;
                 }
 

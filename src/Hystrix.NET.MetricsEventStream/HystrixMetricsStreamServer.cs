@@ -19,7 +19,6 @@ namespace Hystrix.NET.MetricsEventStream
     using System.ComponentModel;
     using System.Globalization;
     using System.Net;
-    using slf4net;
 
     /// <summary>
     /// Listens on a specified url and port for HTTP requests, creates a <see cref="HystrixMetricsStreamer"/> for every
@@ -40,7 +39,7 @@ namespace Hystrix.NET.MetricsEventStream
         /// <summary>
         /// The logger instance for this class.
         /// </summary>
-        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(HystrixMetricsStreamServer));
+        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(typeof(HystrixMetricsStreamServer));
 
         /// <summary>
         /// The single sampler instance used by all the streamer.
@@ -120,7 +119,8 @@ namespace Hystrix.NET.MetricsEventStream
         {
             try
             {
-                Logger.Info(CultureInfo.InvariantCulture, "Starting metrics stream server on '{0}'.", this.HttpListenerPrefix);
+                Logger.Info(string.Format(CultureInfo.InvariantCulture, "Starting metrics stream server on '{0}'.", this.HttpListenerPrefix));
+
                 this.listener = new HttpListener();
                 this.listener.Prefixes.Add(this.HttpListenerPrefix);
                 this.listener.Start();
@@ -134,7 +134,7 @@ namespace Hystrix.NET.MetricsEventStream
                     this.listener.Stop();
                 }
 
-                Logger.Error(e, "Failed to start stream server.");
+                Logger.Error("Failed to start stream server.", e);
 
                 throw;
             }

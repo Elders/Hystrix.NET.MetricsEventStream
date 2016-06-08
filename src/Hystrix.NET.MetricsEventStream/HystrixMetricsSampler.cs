@@ -22,7 +22,6 @@ namespace Hystrix.NET.MetricsEventStream
     using Netflix.Hystrix.Util;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
-    using slf4net;
 
     /// <summary>
     /// Samples Hystrix metrics (<see cref="HystrixCommandMetrics.Instances"/>, <see cref="HystrixThreadPoolMetrics.Instances"/>)
