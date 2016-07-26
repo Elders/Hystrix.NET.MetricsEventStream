@@ -49,6 +49,6 @@ SET RELEASE_NOTES=RELEASE_NOTES.md
 SET SUMMARY="Hystrix.MetricsEventStream"
 SET DESCRIPTION="Hystrix.MetricsEventStream"
 
-%FAKE% %NYX% appName=Hystrix.NET.MetricsEventStream appReleaseNotes=%RELEASE_NOTES% appSummary=%SUMMARY% appDescription=%DESCRIPTION% nugetkey=%RELEASE_NUGETKEY% nugetPackageName=Hystrix.MetricsEventStream
+%FAKE% %NYX% appName=Hystrix.NET.MetricsEventStream appReleaseNotes=%RELEASE_NOTES% appSummary=%SUMMARY% appDescription=%DESCRIPTION% nugetkey=%RELEASE_NUGETKEY% nugetPackageName=Hystrix.NET.MetricsEventStream
 
 IF NOT [%1]==[] (%FAKE% %NYX% "target=Release" -st appReleaseNotes=%RELEASE_NOTES%)
