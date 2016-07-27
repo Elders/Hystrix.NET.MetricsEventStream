@@ -16,12 +16,11 @@ namespace Elders.Hystrix.NET.MetricsEventStream
 {
     using System;
     using System.Collections.Generic;
-    using Netflix.Hystrix;
-    using Netflix.Hystrix.CircuitBreaker;
-    using Netflix.Hystrix.ThreadPool;
-    using Netflix.Hystrix.Util;
+    using CircuitBreaker;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using ThreadPool;
+    using Util;
 
     /// <summary>
     /// Samples Hystrix metrics (<see cref="HystrixCommandMetrics.Instances"/>, <see cref="HystrixThreadPoolMetrics.Instances"/>)
@@ -176,7 +175,7 @@ namespace Elders.Hystrix.NET.MetricsEventStream
                         new JProperty("99", commandMetrics.GetTotalTimePercentile(99)),
                         new JProperty("99.5", commandMetrics.GetTotalTimePercentile(99.5)),
                         new JProperty("100", commandMetrics.GetTotalTimePercentile(100)))),
-                new JProperty("propertyValue_circuitBreakerRequestVolumeThreshold", commandProperties.CircuitBreakerRequestVolumeThreshold.Get()), // property values for reporting what is actually seen by the command rather than what was set somewhere 
+                new JProperty("propertyValue_circuitBreakerRequestVolumeThreshold", commandProperties.CircuitBreakerRequestVolumeThreshold.Get()), // property values for reporting what is actually seen by the command rather than what was set somewhere
                 new JProperty("propertyValue_circuitBreakerSleepWindowInMilliseconds", (long)commandProperties.CircuitBreakerSleepWindow.Get().TotalMilliseconds),
                 new JProperty("propertyValue_circuitBreakerErrorThresholdPercentage", commandProperties.CircuitBreakerErrorThresholdPercentage.Get()),
                 new JProperty("propertyValue_circuitBreakerForceOpen", commandProperties.CircuitBreakerForceOpen.Get()),
@@ -227,7 +226,7 @@ namespace Elders.Hystrix.NET.MetricsEventStream
         }
 
         /// <summary>
-        /// Gets the current time in the format of JavaScript, which is the elapsed 
+        /// Gets the current time in the format of JavaScript, which is the elapsed
         /// time since 1970.01.01 00:00:00 in milliseconds.
         /// </summary>
         /// <returns>The current time.</returns>

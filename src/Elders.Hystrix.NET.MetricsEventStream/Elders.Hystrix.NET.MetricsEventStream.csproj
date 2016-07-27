@@ -31,12 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Java.Util.Concurrent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hystrix.1.0.0-beta0003\lib\net45-full\Java.Util.Concurrent.dll</HintPath>
+    <Reference Include="Elders.Hystrix.NET, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hystrix.NET.1.0.0\lib\net45-full\Elders.Hystrix.NET.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Netflix.Hystrix, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hystrix.1.0.0-beta0003\lib\net45-full\Netflix.Hystrix.dll</HintPath>
+    <Reference Include="Java.Util.Concurrent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hystrix.NET.1.0.0\lib\net45-full\Java.Util.Concurrent.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
