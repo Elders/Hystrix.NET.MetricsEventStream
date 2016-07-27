@@ -7,8 +7,8 @@
     <ProjectGuid>{30A858B7-6D83-4BDE-979F-7CDC56C1FA9B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hystrix.NET.MetricsEventStream</RootNamespace>
-    <AssemblyName>Hystrix.NET.MetricsEventStream</AssemblyName>
+    <RootNamespace>Elders.Hystrix.NET.MetricsEventStream</RootNamespace>
+    <AssemblyName>Elders.Hystrix.NET.MetricsEventStream</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

@@ -5,11 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{F7EF1BFA-258C-4E39-B8C3-538BD0DD44DE}"
 	ProjectSection(SolutionItems) = preProject
-		Hystrix.NET.MetricsEventStream\Hystrix.NET.MetricsEventStream.nuspec = Hystrix.NET.MetricsEventStream\Hystrix.NET.MetricsEventStream.nuspec
+		Hystrix.NET.MetricsEventStream\Elders.Hystrix.NET.MetricsEventStream.nuspec = Hystrix.NET.MetricsEventStream\Elders.Hystrix.NET.MetricsEventStream.nuspec
 		..\RELEASE_NOTES.md = ..\RELEASE_NOTES.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hystrix.NET.MetricsEventStream", "Hystrix.NET.MetricsEventStream\Hystrix.NET.MetricsEventStream.csproj", "{30A858B7-6D83-4BDE-979F-7CDC56C1FA9B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elders.Hystrix.NET.MetricsEventStream", "Elders.Hystrix.NET.MetricsEventStream\Elders.Hystrix.NET.MetricsEventStream.csproj", "{30A858B7-6D83-4BDE-979F-7CDC56C1FA9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

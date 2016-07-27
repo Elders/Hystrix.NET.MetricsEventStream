@@ -40,23 +40,23 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "Hystrix.NET.MetricsEventStream.Logging")]
-[assembly: SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Scope = "member", Target = "Hystrix.NET.MetricsEventStream.Logging.Logger.#Invoke(Hystrix.NET.MetricsEventStream.Logging.LogLevel,System.Func`1<System.String>,System.Exception,System.Object[])")]
+[assembly: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "Elders.Hystrix.NET.MetricsEventStream.Logging")]
+[assembly: SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Scope = "member", Target = "Elders.Hystrix.NET.MetricsEventStream.Logging.Logger.#Invoke(Elders.Hystrix.NET.MetricsEventStream.Logging.LogLevel,System.Func`1<System.String>,System.Exception,System.Object[])")]
 
 // If you copied this file manually, you need to change all "YourRootNameSpace" so not to clash with other libraries
 // that use LibLog
 #if LIBLOG_PROVIDERS_ONLY
-namespace Hystrix.NET.MetricsEventStream.LibLog
+namespace Elders.Hystrix.NET.MetricsEventStream.LibLog
 #else
-namespace Hystrix.NET.MetricsEventStream.Logging
+namespace Elders.Hystrix.NET.MetricsEventStream.Logging
 #endif
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 #if LIBLOG_PROVIDERS_ONLY
-    using Hystrix.NET.MetricsEventStream.LibLog.LogProviders;
+    using Elders.Hystrix.NET.MetricsEventStream.LibLog.LogProviders;
 #else
-    using Hystrix.NET.MetricsEventStream.Logging.LogProviders;
+    using Elders.Hystrix.NET.MetricsEventStream.Logging.LogProviders;
 #endif
     using System;
 #if !LIBLOG_PROVIDERS_ONLY
@@ -426,7 +426,7 @@ namespace Hystrix.NET.MetricsEventStream.Logging
         /// The disable logging environment variable. If the environment variable is set to 'true', then logging
         /// will be disabled.
         /// </summary>
-        public const string DisableLoggingEnvironmentVariable = "Hystrix.NET.MetricsEventStream_LIBLOG_DISABLE";
+        public const string DisableLoggingEnvironmentVariable = "Elders.Hystrix.NET.MetricsEventStream_LIBLOG_DISABLE";
         private const string NullLogProvider = "Current Log Provider is not set. Call SetCurrentLogProvider " +
                                                "with a non-null value first.";
         private static dynamic s_currentLogProvider;
@@ -726,9 +726,9 @@ namespace Hystrix.NET.MetricsEventStream.Logging
 }
 
 #if LIBLOG_PROVIDERS_ONLY
-namespace Hystrix.NET.MetricsEventStream.LibLog.LogProviders
+namespace Elders.Hystrix.NET.MetricsEventStream.LibLog.LogProviders
 #else
-namespace Hystrix.NET.MetricsEventStream.Logging.LogProviders
+namespace Elders.Hystrix.NET.MetricsEventStream.Logging.LogProviders
 #endif
 {
     using System;
