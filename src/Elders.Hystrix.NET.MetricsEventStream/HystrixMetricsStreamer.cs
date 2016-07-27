@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Hystrix.NET.MetricsEventStream
+namespace Elders.Hystrix.NET.MetricsEventStream
 {
+    using Logging;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Net;
-    using slf4net;
 
     /// <summary>
     /// A steamer which is created for every connected client. The streamer will listen the sampler and stream the JSON formatted
@@ -46,7 +46,7 @@ namespace Hystrix.NET.MetricsEventStream
         /// <summary>
         /// The logger instance for this type.
         /// </summary>
-        private static readonly ILogger Logger = LoggerFactory.GetLogger(typeof(HystrixMetricsStreamer));
+        private static readonly ILog Logger = LogProvider.GetLogger(typeof(HystrixMetricsStreamer));
 
         /// <summary>
         /// Streamer threads are uniquely named using this id.
@@ -61,7 +61,7 @@ namespace Hystrix.NET.MetricsEventStream
         /// <summary>
         /// Metrics data received from the sampler is stored in this queue before streaming to the client.
         /// </summary>
-        private Queue<string> metricsDataQueue = new Queue<string>();
+        private LinkedList<string> metricsDataQueue = new LinkedList<string>();
 
         /// <summary>
         /// The global sampler instance got from the parent <see cref="HystrixMetricsStreamServer"/>.
@@ -78,12 +78,12 @@ namespace Hystrix.NET.MetricsEventStream
         {
             if (sampler == null)
             {
-                throw new ArgumentNullException("sampler");
+                throw new ArgumentNullException(nameof(sampler));
             }
 
             if (context == null)
             {
-                throw new ArgumentNullException("context");
+                throw new ArgumentNullException(nameof(context));
             }
 
             this.sampler = sampler;
@@ -143,7 +143,7 @@ namespace Hystrix.NET.MetricsEventStream
             }
             catch (HttpListenerException)
             {
-                Logger.Info(CultureInfo.InvariantCulture, "Streaming connection #{0} closed by client.", this.Id);
+                Logger.Info(string.Format(CultureInfo.InvariantCulture, "Streaming connection #{0} closed by client.", this.Id));
             }
             finally
             {
@@ -169,7 +169,7 @@ namespace Hystrix.NET.MetricsEventStream
                 }
                 else
                 {
-                    Logger.Warn(CultureInfo.InvariantCulture, "Invalid delay parameter in request: '{0}'", streamDelayInMilliseconds);
+                    Logger.Warn(string.Format(CultureInfo.InvariantCulture, "Invalid delay parameter in request: '{0}'", streamDelayInMilliseconds));
                 }
             }
 
@@ -185,17 +185,26 @@ namespace Hystrix.NET.MetricsEventStream
         {
             lock (this.metricsDataQueue)
             {
-                if (this.metricsDataQueue.Count + e.Data.Count() > QueueSizeWarningLimit)
+                if (this.metricsDataQueue.Count > QueueSizeWarningLimit)
                 {
-                    Logger.Warn(CultureInfo.InvariantCulture, "Streamer #{0} data queue is full, metrics thrown away.", this.Id);
-                    return;
+                    Console.WriteLine(++counter);
+                    Logger.Warn(string.Format(CultureInfo.InvariantCulture, "Streamer #{0} data queue is full, metrics thrown away.", this.Id));
+                    foreach (string data in e.Data)
+                    {
+                        this.metricsDataQueue.AddLast(data);
+                        this.metricsDataQueue.RemoveFirst();
+                    }
                 }
-
-                foreach (string data in e.Data)
+                else
                 {
-                    this.metricsDataQueue.Enqueue(data);
+                    foreach (string data in e.Data)
+                    {
+                        this.metricsDataQueue.AddLast(data);
+                    }
                 }
             }
         }
+
+        private static int counter = 0;
     }
 }

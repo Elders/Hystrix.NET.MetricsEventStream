@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Hystrix.NET.MetricsEventStream
+namespace Elders.Hystrix.NET.MetricsEventStream
 {
     using System;
     using System.Collections.Generic;
@@ -22,7 +22,6 @@ namespace Hystrix.NET.MetricsEventStream
     using Netflix.Hystrix.Util;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
-    using slf4net;
 
     /// <summary>
     /// Samples Hystrix metrics (<see cref="HystrixCommandMetrics.Instances"/>, <see cref="HystrixThreadPoolMetrics.Instances"/>)

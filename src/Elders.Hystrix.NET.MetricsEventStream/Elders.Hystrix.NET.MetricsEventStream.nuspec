@@ -7,8 +7,8 @@
     <authors>@authors@</authors>
     <language>en-US</language>
     <summary>@summary@</summary>
-    <licenseUrl>https://github.com/Elders/Hystrix.NET.MetricsEventStream/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/Hystrix.NET.MetricsEventStream</projectUrl>
+    <licenseUrl>https://github.com/Elders/Elders.Hystrix.NET.MetricsEventStream/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Elders.Hystrix.NET.MetricsEventStream</projectUrl>
     <releaseNotes>@releaseNotes@</releaseNotes>
     <tags>hystrix,MetricsEventStream</tags>
     @dependencies@
