@@ -49,10 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Packages\LibLog.4.2\LibLog.cs" />
+    <Compile Include="CrossDomainSampleDataProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HystrixMetricsSampler.cs" />
     <Compile Include="HystrixMetricsStreamer.cs" />
     <Compile Include="HystrixMetricsStreamServer.cs" />
+    <Compile Include="HystrixSampleDataProvider.cs" />
+    <Compile Include="ISampleDataProvider.cs" />
     <Compile Include="SampleDataAvailableEventArgs.cs" />
     <Compile Include="StoppableBackgroundWorker.cs" />
   </ItemGroup>
