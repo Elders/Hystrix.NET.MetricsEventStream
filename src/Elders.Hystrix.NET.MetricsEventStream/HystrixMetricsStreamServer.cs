@@ -57,6 +57,8 @@ namespace Elders.Hystrix.NET.MetricsEventStream
         /// </summary>
         private List<HystrixMetricsStreamer> streamers = new List<HystrixMetricsStreamer>();
 
+        private readonly ISampleDataProvider dataProvider;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HystrixMetricsStreamServer"/> class.
         /// </summary>
@@ -66,7 +68,7 @@ namespace Elders.Hystrix.NET.MetricsEventStream
         /// the number of concurrent connections reach this maximum.</param>
         /// <param name="sampleInterval">The interval between sampling the Hystrix metrics.
         /// Passed through to the <see cref="HystrixMetricsSampler"/></param>
-        public HystrixMetricsStreamServer(string httpListenerPrefix, int maxConcurrentConnections, TimeSpan sampleInterval)
+        public HystrixMetricsStreamServer(string httpListenerPrefix, int maxConcurrentConnections, TimeSpan sampleInterval, ISampleDataProvider dataProvider=null)
             : base(ThreadName)
         {
             if (string.IsNullOrEmpty(httpListenerPrefix))
@@ -82,8 +84,8 @@ namespace Elders.Hystrix.NET.MetricsEventStream
             this.HttpListenerPrefix = httpListenerPrefix;
             this.MaxConcurrentConnections = maxConcurrentConnections;
             this.SampleInterval = sampleInterval;
-
-            this.sampler = new HystrixMetricsSampler(sampleInterval);
+            this.dataProvider = dataProvider ?? new HystrixSampleDataProvider();
+            this.sampler = new HystrixMetricsSampler(sampleInterval, this.dataProvider);
         }
 
         /// <summary>
@@ -126,7 +128,7 @@ namespace Elders.Hystrix.NET.MetricsEventStream
                 this.listener.Prefixes.Add(this.HttpListenerPrefix);
                 this.listener.Start();
 
-                this.sampler = new HystrixMetricsSampler(this.SampleInterval);
+                this.sampler = new HystrixMetricsSampler(this.SampleInterval, dataProvider);
             }
             catch (Exception e)
             {
