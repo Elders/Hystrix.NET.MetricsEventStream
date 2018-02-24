@@ -1,4 +1,7 @@
-﻿### 1.0.3 - 27.07.2016
+﻿### 1.0.4 - 27.07.2016
+* Implemented cross domain data provider
+
+### 1.0.3 - 27.07.2016
 * Stable release
 
 ### 1.0.2 - 27.07.2016
